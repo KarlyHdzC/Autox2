@@ -1,0 +1,100 @@
+{ 
+    "_id" : ObjectId("5af71925a78a1b160ce3cd24"), 
+    "marca" : "Ford", 
+    "modelo" : "Fiesta", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T16:41:09.103+0000"), 
+    "updatedAt" : ISODate("2018-05-12T16:41:09.103+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71977b2f1832e149a7c5f"), 
+    "marca" : "Chevrolet", 
+    "modelo" : "Cavalier", 
+    "anio" : NumberInt(2018), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T16:42:31.500+0000"), 
+    "updatedAt" : ISODate("2018-05-12T16:42:31.500+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af719be2d8bd92b1859fa3f"), 
+    "marca" : "Honda", 
+    "modelo" : "Fit", 
+    "anio" : NumberInt(2017), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T16:43:42.104+0000"), 
+    "updatedAt" : ISODate("2018-05-12T16:43:42.104+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71c4a03d9e2037c5c9688"), 
+    "marca" : "Ford", 
+    "modelo" : "Focus", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T16:54:34.149+0000"), 
+    "updatedAt" : ISODate("2018-05-12T16:54:34.149+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71e9934affc0a8032abdd"), 
+    "marca" : "Honda", 
+    "modelo" : "Civic", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T17:04:25.294+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:25.294+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71ea934affc0a8032abde"), 
+    "marca" : "Honda", 
+    "modelo" : "City", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T17:04:41.744+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:41.744+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71eaf34affc0a8032abdf"), 
+    "marca" : "Chevrolet", 
+    "modelo" : "Spark", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T17:04:47.025+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:47.025+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71eaf34affc0a8032abe0"), 
+    "marca" : "Chevrolet", 
+    "modelo" : "Beat", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T17:04:47.619+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:47.619+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71eb034affc0a8032abe1"), 
+    "marca" : "Mazda", 
+    "modelo" : "3 ", 
+    "anio" : NumberInt(2009), 
+    "version" : "Sedan", 
+    "createdAt" : ISODate("2018-05-12T17:04:48.158+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:48.158+0000"), 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5af71eb034affc0a8032abe2"), 
+    "marca" : "Mazda", 
+    "modelo" : "2", 
+    "anio" : NumberInt(2009), 
+    "version" : "La Chida", 
+    "createdAt" : ISODate("2018-05-12T17:04:48.706+0000"), 
+    "updatedAt" : ISODate("2018-05-12T17:04:48.706+0000"), 
+    "__v" : NumberInt(0)
+}

@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "5302757c-2c4a-427c-99d1-d480f2c88866",
+		"name": "API Vehiculos",
+		"description": "djfcjksd",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autos",
+			"description": "Instrucciones get/post/put/delete\n",
+			"item": [
+				{
+					"name": "Insertar auto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"marca\" : \"Ford\",\n\t\"modelo\" : \"Fiesta\",\n\t\"anio\" : 2009, \n\t\"version\": \"La Chida\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/api/auto",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"api",
+								"auto"
+							]
+						},
+						"description": "POST"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Carros",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"marca\" : \"Ford\",\n\t\"modelo\" : \"Fiesta\",\n\t\"anio\" : 2009, \n\t\"version\": \"La Chida\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/api/autos/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"api",
+								"autos",
+								""
+							]
+						},
+						"description": "get"
+					},
+					"response": []
+				},
+				{
+					"name": "Obtener Carro",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"marca\" : \"Ford\",\n\t\"modelo\" : \"Fiesta\",\n\t\"anio\" : 2009, \n\t\"version\": \"La Chida\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/api/auto/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"api",
+								"auto",
+								""
+							]
+						},
+						"description": "/id"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar valores por ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"anio\" : 2012, \n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/api/auto/5af71948aab97811dc93d172",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"api",
+								"auto",
+								"5af71948aab97811dc93d172"
+							]
+						},
+						"description": "Put"
+					},
+					"response": []
+				},
+				{
+					"name": "Matarlo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"anio\" : 2015 \n}"
+						},
+						"url": {
+							"raw": "http://localhost:7070/api/auto/5af71948aab97811dc93d172",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "7070",
+							"path": [
+								"api",
+								"auto",
+								"5af71948aab97811dc93d172"
+							]
+						},
+						"description": "delete"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

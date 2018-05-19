@@ -1,0 +1,407 @@
+//INSERTAR UN ELEMENTO A UNA COLECCION 
+    //LA COLECCIÓN ES "estudiante" que se encuentra en la db
+db.estudiante.insertOne({
+	nombre: "Pepe",
+    edad: 23,
+    boleta: 2012630350
+    }
+)
+
+//INSERTAR MUCHOS ELEMENTO A UNA COLECCION 
+db.estudiante.insertMany([
+    {nombre:"Daniel", edad:24, boleta: 2012645678},
+    {nombre:"Roman", edad:25, boleta: 2010645678},
+    {nombre:1234, edad:26, boleta:"abcdefg"}
+])
+
+
+//MOSTRAR LAS COLECCIONES 
+    show collecttions 
+
+//BUSCAR DENTRO DE LA COLECCION 
+    db.coleccion.find()
+    db.coleccion.find().pretty()
+    db.estudiante.find().pretty()
+
+
+//ENCONTRAR DENTRO DE UNA COLECCION 
+    // GREATER THAN : $gt: 
+    db.estudiante.find({edad:{$gt:24}})
+    db.estudiante.find({nombre:"Roman"})
+
+//UPDATE AL PRIMERO QUE ENCUENTRE DE UN DOCUMENTO 
+    try{
+        db.estudiante.updateOne(
+            {"nombre" : "Pepe"},
+            {$set: {"nombre" : "José Ricardo"} }
+        );
+    }catch(e){
+        print(e);
+    }
+
+//UPDATE A MUCHOS 
+    try{
+        db.estudiante.updateMany(
+            {edad :{$gt:24}},
+            {$set: {"entidad" : "CDMX"} }
+        );
+    }catch(e){
+        print(e);
+    }
+
+//REEMPLAZAR, CONSERVA EL ID PERO CAMBIA LOS ATRIBUTOS
+    try{
+        db.estudiante.replaceOne(
+            {edad : 26},
+            {"nombre": 1234, "edad" : 26, "boleta" : "abcdefg"}
+        );
+    }catch(e){
+        print(e);
+    }
+
+//SI QUIEREMOS REEMPLAZAR UNO PERO SI ESTE NO EXISTE, ENTONCES LO CREAMOS.
+    try{
+        db.estudiante.replaceOne(
+            {"edad" : 99},
+            {"nombre": "El Viejon", "edad" : 99, "boleta" : 2016630173},
+            {upsert: true}
+        );
+    }catch(e){
+        print(e);
+    }
+
+//hacer actualizaciones multiples.
+    try{
+        db.estudiante.updateMany(
+            {"edad" : {$gte:26}},
+            {$set:{"edad":15}}
+        );
+    }catch(e){
+        print(e);
+    }    
+
+//deleteONE
+    try{
+        db.estudiante.deleteOne(
+            {"boleta" : "abcdefg"}
+        );
+    }catch(e){
+        print(e);
+    }
+
+//deleteMany
+    try{
+        db.estudiante.deleteMany(
+            {"edad" : {$gte:20}}
+        );
+    }catch(e){
+        print(e);
+    }
+
+//--------------------------------------------------------------------------------------------------
+
+//DATOS PRUEBA 
+for(var i = 1; i<=25; i++){
+    db.testData.insert( {name:"pepe"+i,numero:i})
+}
+
+//OPERADORES LÓGICOS. Menores a 5 o que contengan en su nombre un 8
+
+//OR
+db.testData.find(
+    {
+        $or: [
+            {numero: { $lt: 5} },
+            {name: { $regex: ".*8.*"} }
+        ]
+    }
+)
+
+//AND
+db.testData.find(
+    {
+        $and: [
+            {numero: { $lt: 20} },
+            {name: { $regex: ".*5.*"} }
+        ]
+    }
+)
+
+//NOT no acepta regex, por lo cual se debe declarar la expresion regular 
+db.testData.find(
+    {name: { $not : /1/ }}
+)
+
+
+//OPERADOR LÓGICO NOR: 
+    Documentos mayores a 20 pero que no contengan 5 en su cadena 
+
+db.testData.find(
+    {
+        $nor: [
+            {numero: { $lt: 20} },
+            {name: { $regex: ".*5.*"} }
+        ]
+    }
+)
+
+//OPERADORES DE COMPARACIÓN
+
+// $exists 
+db.testData.find( { edad: { $exists: true}})
+db.testData.find( { numero: { $exists: true}})
+
+//$type 
+db.testData.insert( { name: 9999, numero: "10"})
+db.testData.find({ numero:{ $type: "number"} })
+db.testData.find({ numero:{ $type: "string"} })
+
+//MODULO 
+db.testData.find({ numero: { $mod: [5,0] } })
+
+//----------------------------------------------------------------
+use compras
+
+//Creamos la coleccion
+db.compras.insert([
+    {_id:1, subject:"Cafe", views: 50},
+    {_id:2, subject:"Galletas de cafe", views: 5},
+    {_id:3, subject:"Chocolate abuelita", views: 90},    
+    {_id:4, subject:"Huevos", views: 100},
+    {_id:5, subject:"Proteina de chocolate", views: 200},
+    {_id:6, subject:"Jitomate", views: 80},  
+    {_id:7, subject:"Cebollas", views: 10},
+    {_id:8, subject:"Membrillo", views: 10}
+])
+
+db.compras.insert([
+    {_id:9, subject:"Jitomate con", views: 200},
+    {_id:10, subject:"JiTomaTe", views: 10}
+])
+
+
+//Asignamos indice
+db.compras.ensureIndex( {subject:"text"})
+
+//Busqueda de texto 
+db.compras.find( {$text:{$search:"cafe"}})
+db.compras.find( {$text:{$search:"HuEVo"}})
+
+//----------------------------------------------------------------
+
+//INYECTAR CÓDIGO JAVASCRIPT
+db.testData.find( { $where: "this.numero > 10" });
+
+
+//----------------------------------------------------------------
+
+db.inventario.insertMany([
+    {
+        articulo: "periodico", 
+        tags: ["blanco", "papel", "noticias"],
+        stock: [{ bodega: "A", cantidad: 5}, { bodega: "C", cantidad: 15}]
+    },
+
+    {
+        articulo: "libreta", 
+        tags: ["colores", "papel", "escuela"],
+        stock: [{ bodega: "C", cantidad: 5}]
+    },
+
+    {
+        articulo: "revista", 
+        tags: ["colores", "papel", "chismes"],
+        stock: [{ bodega: "A", cantidad: 60}, { bodega: "B", cantidad: 15}]
+    },
+
+    {
+        articulo: "bloc", 
+        tags: ["blanco", "papel", "escuela", "oficina"],
+        stock: [{ bodega: "A", cantidad: 40}, { bodega: "B", cantidad: 5}]
+    },
+
+    {
+        articulo: "postal", 
+        tags: ["colores", "carton", "informativo"],
+        stock: [{ bodega: "B", cantidad: 15}, { bodega: "C", cantidad: 35}]
+    },
+]
+);
+
+
+//buscamos en un arreglo de cadenas.
+db.inventario.find({ 
+    tags: { $all: ["papel","escuela"]}
+}).pretty()
+
+
+//buscar dentro de los atributos de los objetos de los arreglos 
+db.inventario.find({ 
+    stock: { 
+        $all: [
+        { "$elemMatch": { bodega: "B"} },
+        { "$elemMatch": { cantidad: {$gt:20}}} 
+        ]       
+    }
+})
+
+
+
+db.inventario2.insertMany([
+    {
+        articulo: "periodico", 
+        tags: ["blanco", "papel", "noticias"],
+        stock: [{ bodega: "A", cantidad: 5}, { bodega: "C", cantidad: 15}],
+        dim_cm: [14,21]
+    },
+
+    {
+        articulo: "libreta", 
+        tags: ["colores", "papel", "escuela"],
+        stock: [{ bodega: "C", cantidad: 5}],
+        dim_cm: [14,21]
+    },
+
+    {
+        articulo: "revista", 
+        tags: ["colores", "papel", "chismes"],
+        stock: [{ bodega: "A", cantidad: 60}, { bodega: "B", cantidad: 15}],
+        dim_cm: [14,21]
+    },
+
+    {
+        articulo: "bloc", 
+        tags: ["blanco", "papel", "escuela", "oficina"],
+        stock: [{ bodega: "A", cantidad: 40}, { bodega: "B", cantidad: 5}],
+        dim_cm: [22.85,30]
+    },
+
+    {
+        articulo: "postal", 
+        tags: ["colores", "carton", "informativo"],
+        stock: [{ bodega: "B", cantidad: 15}, { bodega: "C", cantidad: 35}],
+        dim_cm: [10, 15.25]
+    },
+]
+);
+
+//buscar dentro de una posición de un arreglo
+db.inventario2.find( { "dim_cm.1": {$gt:25} })
+
+db.inventario2.find( { tags: { $size:3}}).pretty()
+
+
+//a partir del objeto que esta en el documento 
+db.inventario2.find( { stock: { bodega:"A", cantidad: 5}})
+
+db.inventario2.find({ 'stock.0.cantidad': { $lte:20 }})
+db.inventario2.find({ 'stock.cantidad': { $lte:20 }})
+
+
+//INCREMENTAR VALORES YA SEA NEGATIVO O POSITIVO 
+db.inventario2.update(
+    {articulo: "postal"},
+    {$inc: {"stock.0.cantidad":-2, "dim_cm.1":2}}
+
+)
+
+db.inventario2.find( {articulo:"postal"} ).pretty()
+
+//Mul: es para multiplicar 
+db.inventario2.update(
+    {articulo:"postal"},
+    {$mul:{"stock.0.cantidad":2}}
+)
+
+//RENAME 
+db.inventario2.updateMany(
+    {},
+    {
+        $rename:{"articulo":"article"}
+    }
+)
+
+//setOnInsert
+db.inventario2.find( {articulo:"cuaderno"} ).pretty()
+
+db.inventario2.update(
+    {article:"cuaderno"},
+    {
+        $set: {material: ["papel","carton"]},
+        $setOnInsert: {cantidad: 100}
+    },
+    {upsert: true}
+)
+
+db.inventario2.update(
+    {tags: {$size:3}},
+    {$set: {dim_cm:[10,10], tamanio:3}},
+    {multi: true}
+)
+
+db.inventario2.update(
+    {tamanio:{$eq:3}},
+    {$unset: {tamanio: ""}},
+    {multi: true}
+)
+
+db.inventario2.update(
+    {tags: {$size:4}},
+    {$min: {"stock.0.cantidad":20}},
+    {multi: true}   
+)
+
+db.inventario2.update(
+    {article:"periodico"},
+    {
+        $currentDate: {
+            lastModified: true, 
+            "update.date": { $type: "timestamp"}
+        }
+    }
+)
+
+//$ no me importa la posicion en la que se encuentre solamente cambialo
+
+db.inventario2.update(
+    {article:"periodico", tags:"blanco"},
+    {$set: {"tags.$":"rosa"}}
+)
+
+db.inventario2.update(
+    {article:"periodico","stock.bodega":"A"},
+    {$set: {"stock.$.cantidad": 9876}}
+)
+
+db.inventario2.update(
+    {article:"libreta"},
+    {$addToSet:{tags:"raya"}}
+)
+
+db.inventario2.update(
+    {article:"libreta"},
+    {$addToSet:{tags:{$each:["cuadro_chico","cuadro_grande","blanco"]}}}
+)
+
+
+// remueve el ultimo & -1 quita en la primera posicion del arreglo
+db.inventario2.update(
+    {article:"libreta"},
+    {$pop:{tags:1}}
+)
+
+db.inventario2.update(
+    {article:"libreta"},
+    {$pullAll:{tags["papel","cuadro_grande"]}}
+)
+
+db.inventario2.update(
+    {},
+    {$pull:{tags:"papel"}},
+    { multi: true}
+)
+
+db.inventario2.update(
+    {article:"bloc"},
+    {$push: {tags:{$each:["colores","de notas"]}}}
+)
